@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeracy Assessment - Mock Paper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: #1e90ff;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        
+        .section-header {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px 0 0 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .instructions {
+            background: #e8f4fd;
+            padding: 15px 20px;
+            margin: 0 0 20px 0;
+            border-left: 4px solid #1e90ff;
+        }
+        
+        .question-block {
+            background: white;
+            margin: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .question-header {
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .question-content {
+            padding: 20px;
+        }
+        
+        .calculator-icon {
+            background: #ff6b35;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .money-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .money-item {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .coin {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .coin-1 { background: #8B4513; }
+        .coin-5 { background: #CD7F32; }
+        .coin-10 { background: #C0C0C0; }
+        
+        .note {
+            width: 80px;
+            height: 40px;
+            margin: 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        
+        .note-2 { background: #228B22; }
+        .note-5 { background: #4169E1; }
+        .note-10 { background: #8B0000; }
+        .note-50 { background: #FFD700; color: black; }
+        
+        .mcq-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .mcq-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mcq-option:hover {
+            border-color: #1e90ff;
+            background-color: #f0f8ff;
+        }
+        
+        .mcq-option input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .text-input {
+            width: 150px;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #1e90ff;
+        }
+        
+        .graph {
+            width: 100%;
+            max-width: 400px;
+            margin: 15px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .rectangle-diagram {
+            width: 200px;
+            height: 120px;
+            border: 3px solid #2E8B57;
+            background-color: #90EE90;
+            margin: 20px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .dimension-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .width-label {
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .height-label {
+            right: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .formula-reference {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .formula-reference h4 {
+            color: #1e90ff;
+            margin-bottom: 10px;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-top: 2px solid #ddd;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .progress {
+            background: #e9ecef;
+            height: 6px;
+            margin: 10px 20px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #1e90ff, #4169e1);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Numeracy Assessment - Mock Paper</h1>
+            <p>Total Time: 75 minutes | 50 Questions</p>
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- PART 1: NO CALCULATOR -->
+        <div class="section-header">
+            PART 1: Simpler Questions (No Calculator) - 26 Questions
+        </div>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> Answer all questions without using a calculator. Use pen and paper for calculations. You have approximately 35 minutes for this section.
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 1 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>18 × 2 = ?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q1">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 2 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>You find the following coins and notes in your wallet.</strong></p>
+                <p>How much money do you have?</p>
+                
+                <div class="money-display">
+                    <div class="money-item">
+                        <div class="coin coin-1">1¢</div>
+                        <div class="coin coin-1">1¢</div>
+                        <div class="coin coin-5">5¢</div>
+                    </div>
+                    <div class="money-item">
+                        <div class="note note-2">$2</div>
+                        <div class="note note-5">$5</div>
+                    </div>
+                    <div class="money-item">
+                        <div class="note note-10">$10</div>
+                        <div class="note note-10">$10</div>
+                    </div>
+                    <div class="money-item">
+                        <div class="note note-50">$50</div>
+                    </div>
+                </div>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q2" value="77.07">
+                        $77.07
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q2" value="78.07">
+                        $78.07
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q2" value="79.07">
+                        $79.07
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q2" value="80.07">
+                        $80.07
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 3 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A heat wave reached Tokyo on Saturday. The temperature rose from 25°C at 10:00 am to 38°C at 5:30 pm.</strong></p>
+                <p>How long did it take the temperature to rise from 25°C to 38°C?</p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q3" value="6">
+                        6 hours
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q3" value="7">
+                        7 hours
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q3" value="7.5">
+                        7½ hours
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q3" value="8">
+                        8 hours
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 4 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>What is 25% of 80?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q4">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 5 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A recipe calls for 150g of flour. You want to make half the recipe. How much flour do you need?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q5" value="65">
+                        65g
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q5" value="75">
+                        75g
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q5" value="85">
+                        85g
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q5" value="95">
+                        95g
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 6 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Convert 2.5 hours to minutes.</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q6"> <span>minutes</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 7 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>What is 3/4 as a decimal?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q7" value="0.34">
+                        0.34
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q7" value="0.43">
+                        0.43
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q7" value="0.75">
+                        0.75
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q7" value="0.85">
+                        0.85
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 8 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Round 4.67 to the nearest whole number.</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q8">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 9 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A bus journey takes 45 minutes. If the bus leaves at 2:15 PM, what time does it arrive?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q9" value="2:50">
+                        2:50 PM
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q9" value="3:00">
+                        3:00 PM
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q9" value="3:10">
+                        3:10 PM
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q9" value="3:15">
+                        3:15 PM
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 10 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>What is 1/2 + 1/4?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q10" value="1/6">
+                        1/6
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q10" value="2/6">
+                        2/6
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q10" value="3/4">
+                        3/4
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q10" value="2/4">
+                        2/4
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 11 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>156 ÷ 12 = ?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q11">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 12 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A parking meter costs $0.25 for 15 minutes. How much does it cost to park for 1 hour?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q12" value="0.75">
+                        $0.75
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q12" value="1.00">
+                        $1.00
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q12" value="1.25">
+                        $1.25
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q12" value="1.50">
+                        $1.50
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 13 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Convert 3 metres to centimetres.</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q13"> <span>cm</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 14 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>What is 10% of 60?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q14">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 15 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A shop sells 3 apples for $2. How much do 9 apples cost?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q15" value="4">
+                        $4
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q15" value="5">
+                        $5
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q15" value="6">
+                        $6
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q15" value="7">
+                        $7
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 16 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Which number is the largest?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q16" value="0.8">
+                        0.8
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q16" value="3/4">
+                        3/4
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q16" value="0.85">
+                        0.85
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q16" value="4/5">
+                        4/5
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 17 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A train leaves at 08:30 and arrives at 11:15. How long is the journey?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q17" value="2h 15min">
+                        2h 15min
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q17" value="2h 45min">
+                        2h 45min
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q17" value="3h 15min">
+                        3h 15min
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q17" value="3h 45min">
+                        3h 45min
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 18 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>What is 15 × 6?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q18">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 19 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A rectangle has a length of 8 cm and width of 5 cm. What is its perimeter?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q19"> <span>cm</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 20 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Convert 0.6 to a fraction in its simplest form.</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q20" value="6/10">
+                        6/10
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q20" value="3/5">
+                        3/5
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q20" value="2/3">
+                        2/3
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q20" value="6/9">
+                        6/9
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 21 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>What is 7² (7 squared)?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q21">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 22 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A bag contains 20 marbles. If 15 are red and the rest are blue, what percentage are blue?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q22" value="15">
+                        15%
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q22" value="20">
+                        20%
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q22" value="25">
+                        25%
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q22" value="30">
+                        30%
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 23 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Order these numbers from smallest to largest: 0.7, 2/3, 0.65, 3/4</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q23" value="0.65, 2/3, 0.7, 3/4">
+                        0.65, 2/3, 0.7, 3/4
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q23" value="2/3, 0.65, 0.7, 3/4">
+                        2/3, 0.65, 0.7, 3/4
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q23" value="0.65, 0.7, 2/3, 3/4">
+                        0.65, 0.7, 2/3, 3/4
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q23" value="0.7, 0.65, 2/3, 3/4">
+                        0.7, 0.65, 2/3, 3/4
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 24 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A bottle holds 2.5 litres. How many millilitres is this?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q24"> <span>ml</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 25 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>If a book costs $12 and is reduced by 1/4, what is the new price?</strong></p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q25" value="8">
+                        $8
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q25" value="9">
+                        $9
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q25" value="10">
+                        $10
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q25" value="11">
+                        $11
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 26 of 26</span>
+                <span>🚫 No Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A simple bar chart shows ice cream sales:</strong></p>
+                
+                <div style="display: flex; align-items: end; justify-content: space-around; height: 120px; border-bottom: 2px solid #333; margin: 20px 0; padding: 10px;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 40px; height: 60px; background: #ff6b6b; margin-bottom: 5px;"></div>
+                        <span style="font-size: 12px;">Mon<br>30</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 40px; height: 80px; background: #4ecdc4; margin-bottom: 5px;"></div>
+                        <span style="font-size: 12px;">Tue<br>40</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 40px; height: 50px; background: #45b7d1; margin-bottom: 5px;"></div>
+                        <span style="font-size: 12px;">Wed<br>25</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 40px; height: 100px; background: #f7b731; margin-bottom: 5px;"></div>
+                        <span style="font-size: 12px;">Thu<br>50</span>
+                    </div>
+                </div>
+                
+                <p>On which day were the most ice creams sold?</p>
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q26" value="Monday">
+                        Monday
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q26" value="Tuesday">
+                        Tuesday
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q26" value="Wednesday">
+                        Wednesday
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q26" value="Thursday">
+                        Thursday
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 2: WITH CALCULATOR -->
+        <div class="section-header">
+            PART 2: More Complex Questions (Calculator Provided) - 24 Questions
+        </div>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> You may use the calculator provided on screen. Questions become progressively more difficult. You have approximately 40 minutes for this section.
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 27 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>You work for the local administration and are responsible for the green spaces in town. You need to put a fence around this field in the picture.</strong></p>
+                <p>How long will the fence be?</p>
+                
+                <div class="rectangle-diagram">
+                    Green Field
+                    <div class="dimension-label width-label">12 m</div>
+                    <div class="dimension-label height-label">5 m</div>
+                </div>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Perimeter of rectangle</strong> = 2 × (Length + Width)</p>
+                </div>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q27" value="17">
+                        17 m
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q27" value="30">
+                        30 m
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q27" value="34">
+                        34 m
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q27" value="60">
+                        60 m
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 28 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Benjamin works on a building site. He needs to mix 2 kg of concrete. The ratio of cement, stone and sand is 1 : 3 : 3.</strong></p>
+                <p>How many kilograms of cement does Benjamin need to mix 2 kg of concrete?</p>
+                <p><em>Give your answer in kg, without unit of measurement.</em></p>
+                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q28">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 29 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Rajesh has to drain the swimming pool so he can clean it. The pump pumps out 4,000 litres each minute. The pool is filled with 2,000,000 litres.</strong></p>
+                
+                <svg width="450" height="280" style="margin: 15px auto; display: block; border: 1px solid #ccc; background: white;">
+                    <!-- Grid background -->
+                    <defs>
+                        <pattern id="poolGrid" width="30" height="25" patternUnits="userSpaceOnUse">
+                            <path d="M 30 0 L 0 0 0 25" fill="none" stroke="#f0f0f0" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#poolGrid)" />
+                    
+                    <!-- Main axes -->
+                    <line x1="60" y1="220" x2="400" y2="220" stroke="black" stroke-width="2"/>
+                    <line x1="60" y1="220" x2="60" y2="40" stroke="black" stroke-width="2"/>
+                    
+                    <!-- Y-axis labels (Volume) -->
+                    <text x="55" y="45" text-anchor="end" font-size="11" font-weight="bold">2,000,000</text>
+                    <text x="55" y="85" text-anchor="end" font-size="11">1,500,000</text>
+                    <text x="55" y="125" text-anchor="end" font-size="11">1,000,000</text>
+                    <text x="55" y="165" text-anchor="end" font-size="11">500,000</text>
+                    <text x="55" y="225" text-anchor="end" font-size="11">0</text>
+                    
+                    <!-- X-axis labels (Time) -->
+                    <text x="120" y="240" text-anchor="middle" font-size="11">100</text>
+                    <text x="200" y="240" text-anchor="middle" font-size="11">300</text>
+                    <text x="280" y="240" text-anchor="middle" font-size="11">500</text>
+                    
+                    <!-- Axis titles -->
+                    <text x="230" y="265" text-anchor="middle" font-size="13" font-weight="bold">Time (in minutes)</text>
+                    <text x="25" y="130" text-anchor="middle" font-size="13" font-weight="bold" transform="rotate(-90 25 130)">Volume (in litres)</text>
+                    
+                    <!-- Main graph line: V(t) = 2,000,000 - 4,000t -->
+                    <!-- At t=0: V=2,000,000 (y=40) -->
+                    <!-- At t=500: V=0 (y=220) -->
+                    <line x1="60" y1="40" x2="360" y2="220" stroke="#E74C3C" stroke-width="4"/>
+                    
+                    <!-- Equation label -->
+                    <text x="200" y="90" font-size="14" fill="#E74C3C" font-weight="bold">V(t) = 2,000,000 - 4,000 t</text>
+                    
+                    <!-- Grid lines for easier reading -->
+                    <line x1="60" y1="40" x2="400" y2="40" stroke="#e0e0e0" stroke-width="1"/>
+                    <line x1="60" y1="85" x2="400" y2="85" stroke="#e0e0e0" stroke-width="1"/>
+                    <line x1="60" y1="125" x2="400" y2="125" stroke="#e0e0e0" stroke-width="1"/>
+                    <line x1="60" y1="165" x2="400" y2="165" stroke="#e0e0e0" stroke-width="1"/>
+                    
+                    <line x1="120" y1="40" x2="120" y2="220" stroke="#e0e0e0" stroke-width="1"/>
+                    <line x1="200" y1="40" x2="200" y2="220" stroke="#e0e0e0" stroke-width="1"/>
+                    <line x1="280" y1="40" x2="280" y2="220" stroke="#e0e0e0" stroke-width="1"/>
+                </svg>
+                
+                <p>Looking at the graph above, how many minutes (t) will it take until 100,000 litres are left in the pool?</p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q29" value="290">
+                        290 minutes
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q29" value="300">
+                        300 minutes
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q29" value="475">
+                        475 minutes
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q29" value="500">
+                        500 minutes
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 30 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A cylindrical water tank has a radius of 3 metres and a height of 8 metres. What is the volume of the tank?</strong></p>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Volume of cylinder</strong> = π × radius² × height</p>
+                    <p><strong>Use π = 3.14159</strong></p>
+                </div>
+                
+                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q30"> <span>m³</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 31 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A ladder is placed against a wall. The ladder is 5 metres long and the bottom of the ladder is 3 metres from the wall. How high up the wall does the ladder reach?</strong></p>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Pythagorean theorem:</strong> c² = a² + b²</p>
+                </div>
+                
+                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q31"> <span>metres</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 32 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>The table below shows the number of visitors to a museum over 5 days:</strong></p>
+                
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                    <tr style="background: #f0f8ff;">
+                        <th style="border: 1px solid #ddd; padding: 8px;">Day</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Visitors</th>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">Monday</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">245</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">Tuesday</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">312</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">Wednesday</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">298</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">Thursday</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">187</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">Friday</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">378</td>
+                    </tr>
+                </table>
+                
+                <p>What is the average number of visitors per day?</p>
+                <input type="number" step="0.1" class="text-input" placeholder="Enter answer" id="q32">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 33 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A shop offers a 15% discount on all items. Sarah buys a jacket originally priced at $120. After the discount, she also has to pay 8% sales tax on the discounted price.</strong></p>
+                <p>How much does Sarah pay in total?</p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q33" value="109.80">
+                        $109.80
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q33" value="110.16">
+                        $110.16
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q33" value="119.52">
+                        $119.52
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q33" value="129.60">
+                        $129.60
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 34 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A circular garden has a diameter of 14 metres. What is the area of the garden?</strong></p>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Area of circle</strong> = π × radius²</p>
+                    <p><strong>Use π = 3.14159</strong></p>
+                </div>
+                
+                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q34"> <span>m²</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 35 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>The pie chart below shows how Tom spends his monthly salary of $3,600:</strong></p>
+                
+                <svg width="300" height="300" style="margin: 15px auto; display: block; background: white; border: 1px solid #ddd;">
+                    <!-- Pie chart with correct proportions -->
+                    <!-- Rent - 40% (144 degrees) starts from top -->
+                    <path d="M 150 150 L 150 50 A 100 100 0 0 1 244.72 105.28 Z" fill="#FF6B6B" stroke="white" stroke-width="3"/>
+                    <text x="190" y="85" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Rent</text>
+                    <text x="190" y="100" text-anchor="middle" font-size="12" fill="white">40%</text>
+                    
+                    <!-- Food - 25% (90 degrees) -->
+                    <path d="M 150 150 L 244.72 105.28 A 100 100 0 0 1 244.72 194.72 Z" fill="#4ECDC4" stroke="white" stroke-width="3"/>
+                    <text x="235" y="145" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Food</text>
+                    <text x="235" y="160" text-anchor="middle" font-size="12" fill="white">25%</text>
+                    
+                    <!-- Savings - 20% (72 degrees) -->
+                    <path d="M 150 150 L 244.72 194.72 A 100 100 0 0 1 185.28 244.72 Z" fill="#F7B731" stroke="white" stroke-width="3"/>
+                    <text x="205" y="225" text-anchor="middle" font-size="13" fill="black" font-weight="bold">Savings</text>
+                    <text x="205" y="240" text-anchor="middle" font-size="12" fill="black">20%</text>
+                    
+                    <!-- Transport - 15% (54 degrees) -->
+                    <path d="M 150 150 L 185.28 244.72 A 100 100 0 0 1 150 50 Z" fill="#45B7D1" stroke="white" stroke-width="3"/>
+                    <text x="120" y="210" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Transport</text>
+                    <text x="120" y="225" text-anchor="middle" font-size="12" fill="white">15%</text>
+                </svg>
+                
+                <p>How much money does Tom spend on food each month?</p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q35" value="720">
+                        $720
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q35" value="900">
+                        $900
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q35" value="1080">
+                        $1,080
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q35" value="1440">
+                        $1,440
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 36 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A recipe for 6 people requires 450g of pasta. How much pasta is needed for 8 people?</strong></p>
+                <input type="number" step="1" class="text-input" placeholder="Enter answer" id="q36"> <span>grams</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 37 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A car travels 240 km in 3 hours. At this rate, how far will it travel in 5 hours?</strong></p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q37" value="360">
+                        360 km
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q37" value="400">
+                        400 km
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q37" value="420">
+                        420 km
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q37" value="480">
+                        480 km
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 38 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>The bar chart shows the number of books sold by different genres in a bookstore last month:</strong></p>
+                
+                <svg width="400" height="300" style="margin: 15px auto; display: block; border: 1px solid #ddd;">
+                    <!-- Grid -->
+                    <defs>
+                        <pattern id="grid2" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f0f0f0" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid2)" />
+                    
+                    <!-- Axes -->
+                    <line x1="50" y1="250" x2="350" y2="250" stroke="black" stroke-width="2"/>
+                    <line x1="50" y1="250" x2="50" y2="50" stroke="black" stroke-width="2"/>
+                    
+                    <!-- Y-axis labels -->
+                    <text x="45" y="55" text-anchor="end" font-size="10">200</text>
+                    <text x="45" y="100" text-anchor="end" font-size="10">150</text>
+                    <text x="45" y="145" text-anchor="end" font-size="10">100</text>
+                    <text x="45" y="195" text-anchor="end" font-size="10">50</text>
+                    <text x="45" y="255" text-anchor="end" font-size="10">0</text>
+                    
+                    <!-- Bars -->
+                    <rect x="70" y="100" width="40" height="150" fill="#ff6b6b"/>
+                    <rect x="130" y="145" width="40" height="105" fill="#4ecdc4"/>
+                    <rect x="190" y="175" width="40" height="75" fill="#45b7d1"/>
+                    <rect x="250" y="195" width="40" height="55" fill="#f7b731"/>
+                    <rect x="310" y="130" width="40" height="120" fill="#a8e6cf"/>
+                    
+                    <!-- X-axis labels -->
+                    <text x="90" y="270" text-anchor="middle" font-size="10">Fiction</text>
+                    <text x="150" y="270" text-anchor="middle" font-size="10">Mystery</text>
+                    <text x="210" y="270" text-anchor="middle" font-size="10">Romance</text>
+                    <text x="270" y="270" text-anchor="middle" font-size="10">Horror</text>
+                    <text x="330" y="270" text-anchor="middle" font-size="10">Sci-Fi</text>
+                    
+                    <!-- Values on bars -->
+                    <text x="90" y="90" text-anchor="middle" font-size="11" font-weight="bold">150</text>
+                    <text x="150" y="135" text-anchor="middle" font-size="11" font-weight="bold">105</text>
+                    <text x="210" y="165" text-anchor="middle" font-size="11" font-weight="bold">75</text>
+                    <text x="270" y="185" text-anchor="middle" font-size="11" font-weight="bold">55</text>
+                    <text x="330" y="120" text-anchor="middle" font-size="11" font-weight="bold">120</text>
+                </svg>
+                
+                <p>What is the total number of books sold across all genres?</p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q38">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 39 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>Lisa invests $2,500 in a savings account that pays 4% interest per year. How much will she have after 3 years if the interest is compounded annually?</strong></p>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Compound Interest:</strong> A = P × (1 + r)ⁿ</p>
+                    <p>Where: A = final amount, P = principal, r = interest rate, n = number of years</p>
+                </div>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q39" value="2800">
+                        $2,800.00
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q39" value="2812.16">
+                        $2,812.16
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q39" value="2824.32">
+                        $2,824.32
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q39" value="2900">
+                        $2,900.00
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 40 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A triangular plot of land has a base of 24 metres and a height of 18 metres. What is its area?</strong></p>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Area of triangle</strong> = ½ × base × height</p>
+                </div>
+                
+                <input type="number" step="0.1" class="text-input" placeholder="Enter answer" id="q40"> <span>m²</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 41 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>In a class of 30 students, the ratio of boys to girls is 3:2. How many boys are in the class?</strong></p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q41" value="12">
+                        12
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q41" value="15">
+                        15
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q41" value="18">
+                        18
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q41" value="20">
+                        20
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 42 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A cone-shaped container has a radius of 6 cm and a height of 15 cm. What is its volume?</strong></p>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Volume of cone</strong> = ⅓ × π × radius² × height</p>
+                    <p><strong>Use π = 3.14159</strong></p>
+                </div>
+                
+                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q42"> <span>cm³</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 43 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>The line graph shows the temperature changes throughout a day:</strong></p>
+                
+                <svg width="400" height="250" style="margin: 15px auto; display: block; border: 1px solid #ddd;">
+                    <!-- Grid -->
+                    <defs>
+                        <pattern id="grid3" width="25" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 25 0 L 0 0 0 20" fill="none" stroke="#f0f0f0" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid3)" />
+                    
+                    <!-- Axes -->
+                    <line x1="50" y1="200" x2="350" y2="200" stroke="black" stroke-width="2"/>
+                    <line x1="50" y1="200" x2="50" y2="50" stroke="black" stroke-width="2"/>
+                    
+                    <!-- Labels -->
+                    <text x="200" y="230" text-anchor="middle" font-size="12">Time (hours)</text>
+                    <text x="25" y="125" text-anchor="middle" font-size="12" transform="rotate(-90 25 125)">Temperature (°C)</text>
+                    
+                    <!-- Y-axis labels -->
+                    <text x="45" y="55" text-anchor="end" font-size="10">30</text>
+                    <text x="45" y="95" text-anchor="end" font-size="10">25</text>
+                    <text x="45" y="135" text-anchor="end" font-size="10">20</text>
+                    <text x="45" y="175" text-anchor="end" font-size="10">15</text>
+                    <text x="45" y="205" text-anchor="end" font-size="10">10</text>
+                    
+                    <!-- X-axis labels -->
+                    <text x="75" y="215" text-anchor="middle" font-size="10">6am</text>
+                    <text x="125" y="215" text-anchor="middle" font-size="10">9am</text>
+                    <text x="175" y="215" text-anchor="middle" font-size="10">12pm</text>
+                    <text x="225" y="215" text-anchor="middle" font-size="10">3pm</text>
+                    <text x="275" y="215" text-anchor="middle" font-size="10">6pm</text>
+                    <text x="325" y="215" text-anchor="middle" font-size="10">9pm</text>
+                    
+                    <!-- Temperature line -->
+                    <polyline points="75,175 125,155 175,95 225,75 275,115 325,155" 
+                              fill="none" stroke="red" stroke-width="3"/>
+                    
+                    <!-- Data points -->
+                    <circle cx="75" cy="175" r="4" fill="red"/>
+                    <circle cx="125" cy="155" r="4" fill="red"/>
+                    <circle cx="175" cy="95" r="4" fill="red"/>
+                    <circle cx="225" cy="75" r="4" fill="red"/>
+                    <circle cx="275" cy="115" r="4" fill="red"/>
+                    <circle cx="325" cy="155" r="4" fill="red"/>
+                </svg>
+                
+                <p>What was the highest temperature recorded during the day?</p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q43" value="25">
+                        25°C
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q43" value="28">
+                        28°C
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q43" value="30">
+                        30°C
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q43" value="32">
+                        32°C
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 44 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A factory produces 1,250 items per day. If 3% of the items are defective, how many good items are produced each day?</strong></p>
+                <input type="number" class="text-input" placeholder="Enter answer" id="q44">
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 45 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A rectangular swimming pool is 12 metres long, 8 metres wide, and 2 metres deep. How many litres of water does it hold when full?</strong></p>
+                <p><em>(Note: 1 cubic metre = 1,000 litres)</em></p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q45" value="96000">
+                        96,000 litres
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q45" value="192000">
+                        192,000 litres
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q45" value="240000">
+                        240,000 litres
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q45" value="288000">
+                        288,000 litres
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 46 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>The speed limit on a highway is 110 km/h. Convert this speed to metres per second.</strong></p>
+                <p><em>(Hint: 1 km = 1,000 m and 1 hour = 3,600 seconds)</em></p>
+                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q46"> <span>m/s</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 47 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A survey of 200 people asked about their preferred mode of transport. The results were:</strong></p>
+                <ul style="margin: 15px 0; margin-left: 20px;">
+                    <li>Car: 35%</li>
+                    <li>Bus: 28%</li>
+                    <li>Train: 22%</li>
+                    <li>Bicycle: 15%</li>
+                </ul>
+                <p>How many people preferred the train?</p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q47" value="30">
+                        30 people
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q47" value="44">
+                        44 people
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q47" value="56">
+                        56 people
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q47" value="70">
+                        70 people
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 48 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>The surface area of a sphere is 314.16 cm². What is the radius of the sphere?</strong></p>
+                
+                <div class="formula-reference">
+                    <h4>Formula Reference:</h4>
+                    <p><strong>Surface area of sphere</strong> = 4 × π × radius²</p>
+                    <p><strong>Use π = 3.14159</strong></p>
+                </div>
+                
+                <input type="number" step="0.1" class="text-input" placeholder="Enter answer" id="q48"> <span>cm</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 49 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A store sells apples for $3.50 per kilogram. If John buys 2.5 kg of apples and pays with a $10 note, how much change will he receive?</strong></p>
+                
+                <div class="mcq-options">
+                    <label class="mcq-option">
+                        <input type="radio" name="q49" value="1.25">
+                        $1.25
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q49" value="1.75">
+                        $1.75
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q49" value="2.25">
+                        $2.25
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q49" value="2.75">
+                        $2.75
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question-header">
+                <span>Question 50 of 50</span>
+                <span class="calculator-icon">📱 Calculator</span>
+            </div>
+            <div class="question-content">
+                <p><strong>A company's profits over 4 quarters were:</strong></p>
+                <ul style="margin: 15px 0; margin-left: 20px;">
+                    <li>Q1: $125,000</li>
+                    <li>Q2: $98,000</li>
+                    <li>Q3: $147,000</li>
+                    <li>Q4: $156,000</li>
+                </ul>
+                <p>What was the percentage increase in profits from Q2 to Q4?</p>
+                <input type="number" step="0.1" class="text-input" placeholder="Enter answer" id="q50"> <span>%</span>
+            </div>
+        </div>
+
+        <div class="submit-section">
+            <button class="submit-btn" onclick="submitTest()">Submit Test</button>
+            <p style="margin-top: 15px; color: #666;">
+                Make sure you have answered all questions before submitting.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Progress tracking
+        function updateProgress() {
+            const totalQuestions = 50;
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked, input[type="number"]:not([value=""])').length;
+            const progressPercentage = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progressPercentage + '%';
+        }
+
+        // Add event listeners to all inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[type="radio"], input[type="number"]');
+            inputs.forEach(input => {
+                input.addEventListener('change', updateProgress);
+                input.addEventListener('input', updateProgress);
+            });
+        });
+
+        function submitTest() {
+            // Collect all answers
+            const answers = {};
+            
+            // Text inputs
+            const textInputs = document.querySelectorAll('input[type="number"]');
+            textInputs.forEach(input => {
+                if (input.id) {
+                    answers[input.id] = input.value;
+                }
+            });
+            
+            // Radio buttons
+            const radioGroups = ['q2', 'q3', 'q5', 'q27', 'q28', 'q29'];
+            radioGroups.forEach(group => {
+                const selected = document.querySelector(`input[name="${group}"]:checked`);
+                if (selected) {
+                    answers[group] = selected.value;
+                }
+            });
+            
+            // Simple validation
+            const totalAnswered = Object.keys(answers).filter(key => answers[key] !== '').length;
+            
+            if (totalAnswered < 10) {
+                alert('Please answer more questions before submitting.');
+                return;
+            }
+            
+            // Display results
+            alert(`Test submitted successfully!\n\nAnswers provided: ${totalAnswered}\nTotal questions: 50\n\nIn a real test, your answers would be evaluated and you would receive your results.`);
+            
+            console.log('Submitted answers:', answers);
+        }
+
+        // Auto-save functionality (simulated)
+        setInterval(() => {
+            // In a real application, this would save progress to a server
+            const progress = document.getElementById('progressBar').style.width;
+            if (progress) {
+                localStorage.setItem('testProgress', progress);
+            }
+        }, 30000); // Save every 30 seconds
+    </script>
+</body>
+</html>
