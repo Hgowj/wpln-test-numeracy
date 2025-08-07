@@ -397,9 +397,9 @@
                     <span id="timeDisplay">75:00</span>
                 </div>
                 <div style="margin-top: 10px;">
-                    <button type="button" onclick="console.log('Start button clicked'); startTimer();" style="background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 15px; margin: 0 5px; cursor: pointer;">Start Timer</button>
-                    <button type="button" onclick="console.log('Pause button clicked'); pauseTimer();" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 15px; margin: 0 5px; cursor: pointer;">Pause</button>
-                    <button type="button" onclick="console.log('Reset button clicked'); resetTimer();" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 15px; margin: 0 5px; cursor: pointer;">Reset</button>
+                    <button type="button" onclick="startTimer();" style="background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 15px; margin: 0 5px; cursor: pointer;">Start Timer</button>
+                    <button type="button" onclick="pauseTimer();" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 15px; margin: 0 5px; cursor: pointer;">Pause</button>
+                    <button type="button" onclick="resetTimer();" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 15px; margin: 0 5px; cursor: pointer;">Reset</button>
                 </div>
             </div>
         </div>
@@ -1756,7 +1756,7 @@
         </div>
 
         <div class="submit-section">
-            <div onclick="console.log('Submit clicked'); submitTest();" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform 0.2s ease; display: inline-block;">Submit Test</div>
+            <button type="button" onclick="submitTest();" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform 0.2s ease;">Submit Test</button>
             <p style="margin-top: 15px; color: #666;">
                 You can submit even with unanswered questions to view all correct answers.
             </p>
