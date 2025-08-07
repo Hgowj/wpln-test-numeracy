@@ -7,23 +7,25 @@ let originalTime = 4500;
 let timerInterval = null;
 let isRunning = false;
 
-// Correct answers
+// Correct answers for all questions
 const correctAnswers = {
     'q1': '36',
-    'q2': '20', 
-    'q3': '150',
-    'q27': '34',
-    'q28': '154'
+    'q2': '77.07',
+    'q3': '7.5',
+    'q4': '20',
+    'q5': '75',
+    'q27': '34'
 };
 
 // Timer functions
 function startTimer() {
-    console.log('Starting timer...');
+    console.log('Start timer clicked');
     if (isRunning || timeRemaining <= 0) {
         console.log('Timer already running or finished');
         return;
     }
     
+    console.log('Starting timer...');
     isRunning = true;
     timerInterval = setInterval(function() {
         timeRemaining--;
@@ -61,12 +63,13 @@ function updateTimerDisplay() {
     const timerElement = document.getElementById('timeDisplay');
     if (timerElement) {
         timerElement.textContent = display;
+        console.log('Timer updated:', display);
     }
 }
 
 // Progress tracking
 function updateProgress() {
-    const totalQuestions = 5; // Simplified for demo
+    const totalQuestions = Object.keys(correctAnswers).length;
     let answered = 0;
     
     // Count text inputs with values
@@ -88,7 +91,7 @@ function updateProgress() {
     }
 }
 
-// Submit test function
+// Submit test function - shows answers inline
 function submitTest() {
     console.log('Submitting test...');
     pauseTimer();
@@ -110,108 +113,44 @@ function submitTest() {
         userAnswers[input.name] = input.value;
     });
     
-    // Calculate results
-    let correct = 0;
-    let incorrect = 0;
-    let unanswered = 0;
-    const results = [];
-    
+    // Show answers inline for each question
     Object.keys(correctAnswers).forEach(function(questionId) {
         const userAnswer = userAnswers[questionId] || '';
         const correctAnswer = correctAnswers[questionId];
         
-        if (userAnswer === '') {
-            unanswered++;
-            results.push({
-                question: questionId,
-                status: 'unanswered',
-                userAnswer: 'No answer',
-                correctAnswer: correctAnswer
-            });
-        } else if (userAnswer === correctAnswer) {
-            correct++;
-            results.push({
-                question: questionId,
-                status: 'correct',
-                userAnswer: userAnswer,
-                correctAnswer: correctAnswer
-            });
-        } else {
-            incorrect++;
-            results.push({
-                question: questionId,
-                status: 'incorrect',
-                userAnswer: userAnswer,
-                correctAnswer: correctAnswer
-            });
+        // Get feedback and answer display elements
+        const feedbackElement = document.getElementById('feedback-' + questionId);
+        const answerElement = document.getElementById('answer-' + questionId);
+        
+        if (feedbackElement && answerElement) {
+            // Show feedback badge
+            feedbackElement.style.display = 'block';
+            answerElement.style.display = 'block';
+            
+            if (userAnswer === '') {
+                feedbackElement.textContent = 'UNANSWERED';
+                feedbackElement.className = 'answer-feedback unanswered';
+                answerElement.innerHTML = '<strong>Correct Answer:</strong> ' + correctAnswer;
+            } else if (userAnswer === correctAnswer) {
+                feedbackElement.textContent = '✓ CORRECT';
+                feedbackElement.className = 'answer-feedback correct';
+                answerElement.innerHTML = '<strong>✓ Your answer (' + userAnswer + ') is correct!</strong>';
+            } else {
+                feedbackElement.textContent = '✗ INCORRECT';
+                feedbackElement.className = 'answer-feedback incorrect';
+                answerElement.innerHTML = '<strong>✗ Your answer:</strong> ' + userAnswer + ' <br><strong>Correct answer:</strong> ' + correctAnswer;
+            }
         }
     });
     
-    showResults(correct, incorrect, unanswered, results);
-}
-
-// Show results modal
-function showResults(correct, incorrect, unanswered, results) {
-    const modal = document.getElementById('resultsModal');
-    const content = document.getElementById('resultsContent');
-    
-    const total = correct + incorrect + unanswered;
-    const percentage = Math.round((correct / total) * 100);
-    
-    let html = `
-        <div class="score-summary">
-            <h2>Test Results</h2>
-            <h3>Score: ${correct}/${total} (${percentage}%)</h3>
-        </div>
-        
-        <div class="score-details">
-            <div class="score-card correct">
-                <h4>Correct</h4>
-                <p style="font-size: 24px; margin: 5px 0;">${correct}</p>
-            </div>
-            <div class="score-card incorrect">
-                <h4>Incorrect</h4>
-                <p style="font-size: 24px; margin: 5px 0;">${incorrect}</p>
-            </div>
-            <div class="score-card unanswered">
-                <h4>Unanswered</h4>
-                <p style="font-size: 24px; margin: 5px 0;">${unanswered}</p>
-            </div>
-        </div>
-        
-        <h3>Detailed Results:</h3>
-        <div style="max-height: 300px; overflow-y: auto;">
-    `;
-    
-    results.forEach(function(result) {
-        const statusClass = result.status === 'correct' ? 'correct-answer' : 
-                          result.status === 'incorrect' ? 'incorrect-answer' : 'unanswered';
-        const statusText = result.status === 'correct' ? 'CORRECT' : 
-                         result.status === 'incorrect' ? 'WRONG' : 'UNANSWERED';
-        const statusBadgeClass = 'status-' + result.status;
-        
-        html += `
-            <div class="answer-item ${statusClass}">
-                <div>
-                    <strong>${result.question.toUpperCase()}:</strong> 
-                    Your answer: <code>${result.userAnswer}</code> | 
-                    Correct: <code>${result.correctAnswer}</code>
-                </div>
-                <span class="answer-status ${statusBadgeClass}">${statusText}</span>
-            </div>
-        `;
+    // Disable all inputs
+    const allInputs = document.querySelectorAll('input');
+    allInputs.forEach(function(input) {
+        input.disabled = true;
     });
     
-    html += '</div>';
-    
-    content.innerHTML = html;
-    modal.style.display = 'flex';
-}
-
-// Close results modal
-function closeResults() {
-    const modal = document.getElementById('resultsModal');
-    modal.style.display = 'none';
+    // Show completion message
+    alert('Test submitted! Scroll through to see correct answers for each question.');
 }
 
 // Initialize when page loads
@@ -226,26 +165,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const pauseBtn = document.getElementById('pauseBtn');
     const resetBtn = document.getElementById('resetBtn');
     const submitBtn = document.getElementById('submitBtn');
-    const closeBtn = document.getElementById('closeBtn');
     
     if (startBtn) {
-        startBtn.addEventListener('click', startTimer);
+        startBtn.addEventListener('click', function() {
+            console.log('Start button clicked');
+            startTimer();
+        });
     }
     
     if (pauseBtn) {
-        pauseBtn.addEventListener('click', pauseTimer);
+        pauseBtn.addEventListener('click', function() {
+            console.log('Pause button clicked');
+            pauseTimer();
+        });
     }
     
     if (resetBtn) {
-        resetBtn.addEventListener('click', resetTimer);
+        resetBtn.addEventListener('click', function() {
+            console.log('Reset button clicked');
+            resetTimer();
+        });
     }
     
     if (submitBtn) {
-        submitBtn.addEventListener('click', submitTest);
-    }
-    
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeResults);
+        submitBtn.addEventListener('click', function() {
+            console.log('Submit button clicked');
+            submitTest();
+        });
     }
     
     // Add progress tracking to all inputs
@@ -259,4 +205,11 @@ document.addEventListener('DOMContentLoaded', function() {
     updateProgress();
     
     console.log('Initialization complete!');
+    console.log('Found', inputs.length, 'input elements');
+    console.log('Timer buttons found:', {
+        start: !!startBtn,
+        pause: !!pauseBtn,
+        reset: !!resetBtn,
+        submit: !!submitBtn
+    });
 });
