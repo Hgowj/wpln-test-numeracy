@@ -241,8 +241,134 @@
             transition: transform 0.2s ease;
         }
         
-        .submit-btn:hover {
-            transform: translateY(-2px);
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .results-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .answer-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        .correct-answer {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        .incorrect-answer {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .unanswered {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .answer-status {
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .status-correct {
+            background: #28a745;
+        }
+        
+        .status-incorrect {
+            background: #dc3545;
+        }
+        
+        .status-unanswered {
+            background: #ffc107;
+            color: black;
+        }
+        
+        .timer-warning {
+            color: #ff6b35 !important;
+            animation: pulse 1s infinite;
+        }
+        
+        .timer-critical {
+            color: #dc3545 !important;
+            animation: pulse 0.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .score-summary {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .score-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .score-card {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+        }
+        
+        .score-card.correct {
+            background: #28a745;
+        }
+        
+        .score-card.incorrect {
+            background: #dc3545;
+        }
+        
+        .score-card.unanswered {
+            background: #ffc107;
+            color: black;
         }
         
         .progress {
@@ -266,6 +392,9 @@
         <div class="header">
             <h1>Numeracy Assessment - Mock Paper</h1>
             <p>Total Time: 75 minutes | 50 Questions</p>
+            <div id="timer" style="font-size: 18px; font-weight: bold; margin-top: 10px; color: #fff;">
+                Time Remaining: <span id="timeDisplay">75:00</span>
+            </div>
         </div>
         
         <div class="progress">
@@ -1019,10 +1148,10 @@
                 <div class="formula-reference">
                     <h4>Formula Reference:</h4>
                     <p><strong>Volume of cylinder</strong> = π × radius² × height</p>
-                    <p><strong>Use π = 3.14159</strong></p>
+                    <p><strong>Use π = 3.14</strong></p>
                 </div>
                 
-                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q30"> <span>m³</span>
+                <input type="number" step="1" class="text-input" placeholder="Enter answer" id="q30"> <span>m³</span>
             </div>
         </div>
 
@@ -1124,10 +1253,10 @@
                 <div class="formula-reference">
                     <h4>Formula Reference:</h4>
                     <p><strong>Area of circle</strong> = π × radius²</p>
-                    <p><strong>Use π = 3.14159</strong></p>
+                    <p><strong>Use π = 3.14</strong></p>
                 </div>
                 
-                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q34"> <span>m²</span>
+                <input type="number" step="1" class="text-input" placeholder="Enter answer" id="q34"> <span>m²</span>
             </div>
         </div>
 
@@ -1140,26 +1269,28 @@
                 <p><strong>The pie chart below shows how Tom spends his monthly salary of $3,600:</strong></p>
                 
                 <svg width="300" height="300" style="margin: 15px auto; display: block; background: white; border: 1px solid #ddd;">
-                    <!-- Pie chart with correct proportions -->
-                    <!-- Rent - 40% (144 degrees) starts from top -->
-                    <path d="M 150 150 L 150 50 A 100 100 0 0 1 244.72 105.28 Z" fill="#FF6B6B" stroke="white" stroke-width="3"/>
-                    <text x="190" y="85" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Rent</text>
-                    <text x="190" y="100" text-anchor="middle" font-size="12" fill="white">40%</text>
+                    <!-- Pie chart with mathematically correct proportions -->
+                    <!-- Starting from 12 o'clock, going clockwise -->
                     
-                    <!-- Food - 25% (90 degrees) -->
-                    <path d="M 150 150 L 244.72 105.28 A 100 100 0 0 1 244.72 194.72 Z" fill="#4ECDC4" stroke="white" stroke-width="3"/>
-                    <text x="235" y="145" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Food</text>
-                    <text x="235" y="160" text-anchor="middle" font-size="12" fill="white">25%</text>
+                    <!-- Rent - 40% (144 degrees): 0° to 144° -->
+                    <path d="M 150 150 L 150 50 A 100 100 0 0 1 239.3 117.1 Z" fill="#FF6B6B" stroke="white" stroke-width="3"/>
+                    <text x="185" y="85" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Rent</text>
+                    <text x="185" y="100" text-anchor="middle" font-size="12" fill="white">40%</text>
                     
-                    <!-- Savings - 20% (72 degrees) -->
-                    <path d="M 150 150 L 244.72 194.72 A 100 100 0 0 1 185.28 244.72 Z" fill="#F7B731" stroke="white" stroke-width="3"/>
-                    <text x="205" y="225" text-anchor="middle" font-size="13" fill="black" font-weight="bold">Savings</text>
-                    <text x="205" y="240" text-anchor="middle" font-size="12" fill="black">20%</text>
+                    <!-- Food - 25% (90 degrees): 144° to 234° -->
+                    <path d="M 150 150 L 239.3 117.1 A 100 100 0 0 1 186.6 235.4 Z" fill="#4ECDC4" stroke="white" stroke-width="3"/>
+                    <text x="210" y="170" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Food</text>
+                    <text x="210" y="185" text-anchor="middle" font-size="12" fill="white">25%</text>
                     
-                    <!-- Transport - 15% (54 degrees) -->
-                    <path d="M 150 150 L 185.28 244.72 A 100 100 0 0 1 150 50 Z" fill="#45B7D1" stroke="white" stroke-width="3"/>
-                    <text x="120" y="210" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Transport</text>
-                    <text x="120" y="225" text-anchor="middle" font-size="12" fill="white">15%</text>
+                    <!-- Savings - 20% (72 degrees): 234° to 306° -->
+                    <path d="M 150 150 L 186.6 235.4 A 100 100 0 0 1 113.4 235.4 Z" fill="#F7B731" stroke="white" stroke-width="3"/>
+                    <text x="150" y="225" text-anchor="middle" font-size="13" fill="black" font-weight="bold">Savings</text>
+                    <text x="150" y="240" text-anchor="middle" font-size="12" fill="black">20%</text>
+                    
+                    <!-- Transport - 15% (54 degrees): 306° to 360° (back to start) -->
+                    <path d="M 150 150 L 113.4 235.4 A 100 100 0 0 1 150 50 Z" fill="#45B7D1" stroke="white" stroke-width="3"/>
+                    <text x="110" y="140" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Transport</text>
+                    <text x="110" y="155" text-anchor="middle" font-size="12" fill="white">15%</text>
                 </svg>
                 
                 <p>How much money does Tom spend on food each month?</p>
@@ -1372,10 +1503,10 @@
                 <div class="formula-reference">
                     <h4>Formula Reference:</h4>
                     <p><strong>Volume of cone</strong> = ⅓ × π × radius² × height</p>
-                    <p><strong>Use π = 3.14159</strong></p>
+                    <p><strong>Use π = 3.14</strong></p>
                 </div>
                 
-                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q42"> <span>cm³</span>
+                <input type="number" step="1" class="text-input" placeholder="Enter answer" id="q42"> <span>cm³</span>
             </div>
         </div>
 
@@ -1502,9 +1633,9 @@
                 <span class="calculator-icon">📱 Calculator</span>
             </div>
             <div class="question-content">
-                <p><strong>The speed limit on a highway is 110 km/h. Convert this speed to metres per second.</strong></p>
+                <p><strong>The speed limit on a highway is 108 km/h. Convert this speed to metres per second.</strong></p>
                 <p><em>(Hint: 1 km = 1,000 m and 1 hour = 3,600 seconds)</em></p>
-                <input type="number" step="0.01" class="text-input" placeholder="Enter answer" id="q46"> <span>m/s</span>
+                <input type="number" step="1" class="text-input" placeholder="Enter answer" id="q46"> <span>m/s</span>
             </div>
         </div>
 
@@ -1550,15 +1681,15 @@
                 <span class="calculator-icon">📱 Calculator</span>
             </div>
             <div class="question-content">
-                <p><strong>The surface area of a sphere is 314.16 cm². What is the radius of the sphere?</strong></p>
+                <p><strong>The surface area of a sphere is 314 cm². What is the radius of the sphere?</strong></p>
                 
                 <div class="formula-reference">
                     <h4>Formula Reference:</h4>
                     <p><strong>Surface area of sphere</strong> = 4 × π × radius²</p>
-                    <p><strong>Use π = 3.14159</strong></p>
+                    <p><strong>Use π = 3.14</strong></p>
                 </div>
                 
-                <input type="number" step="0.1" class="text-input" placeholder="Enter answer" id="q48"> <span>cm</span>
+                <input type="number" step="1" class="text-input" placeholder="Enter answer" id="q48"> <span>cm</span>
             </div>
         </div>
 
@@ -1599,13 +1730,21 @@
             <div class="question-content">
                 <p><strong>A company's profits over 4 quarters were:</strong></p>
                 <ul style="margin: 15px 0; margin-left: 20px;">
-                    <li>Q1: $125,000</li>
-                    <li>Q2: $98,000</li>
-                    <li>Q3: $147,000</li>
-                    <li>Q4: $156,000</li>
+                    <li>Q1: $100,000</li>
+                    <li>Q2: $80,000</li>
+                    <li>Q3: $120,000</li>
+                    <li>Q4: $120,000</li>
                 </ul>
                 <p>What was the percentage increase in profits from Q2 to Q4?</p>
-                <input type="number" step="0.1" class="text-input" placeholder="Enter answer" id="q50"> <span>%</span>
+                <input type="number" step="1" class="text-input" placeholder="Enter answer" id="q50"> <span>%</span>
+            </div>
+        </div>
+
+        <!-- Results Modal -->
+        <div class="results-modal" id="resultsModal">
+            <div class="results-content">
+                <span class="close-btn" onclick="closeResults()">&times;</span>
+                <div id="resultsContent"></div>
             </div>
         </div>
 
