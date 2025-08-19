@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPN Numeracy Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timer {
+            background: #1e40af;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timer-display {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .timer-controls button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .timer-controls button:hover {
+            background: #2563eb;
+        }
+
+        .timer-controls button:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .test-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            background: #1e40af;
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            margin: -20px -20px 20px -20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #1e40af;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option input {
+            margin-right: 8px;
+        }
+
+        .text-input {
+            width: 150px;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .currency-display {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .currency-item {
+            text-align: center;
+        }
+
+        .currency-item img {
+            width: 80px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .chart-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            border: 1px solid #9ca3af;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .shape-diagram {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .rectangle {
+            width: 150px;
+            height: 100px;
+            background: #22c55e;
+            border: 2px solid #16a34a;
+            position: relative;
+        }
+
+        .pool-shape {
+            width: 200px;
+            height: 150px;
+            background: #3b82f6;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .pool-shape::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: #3b82f6;
+        }
+
+        .dimensions {
+            position: absolute;
+            font-size: 12px;
+            color: #374151;
+            font-weight: bold;
+        }
+
+        .diagram-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .submit-btn {
+            background: #16a34a;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #15803d;
+        }
+
+        .results {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .correct {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .start-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .start-btn {
+            background: #1e40af;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .start-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .formula-ref {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>WPN Numeracy Assessment</h1>
+            <p>75-minute test with two parts: Part 1 (no calculator), Part 2 (calculator provided)</p>
+        </div>
+
+        <div id="start-screen" class="test-section start-screen">
+            <h2>Welcome to the WPN Numeracy Test</h2>
+            <p>This test consists of two parts:</p>
+            <ul style="text-align: left; max-width: 400px; margin: 20px auto;">
+                <li><strong>Part 1:</strong> 26 questions (no calculator) - 35 minutes</li>
+                <li><strong>Part 2:</strong> 24 questions (calculator provided) - 40 minutes</li>
+            </ul>
+            <p>You can pause the timer if needed, and submit your answers at any time.</p>
+            <button class="start-btn" onclick="startTest()">Start Test</button>
+        </div>
+
+        <div id="test-content" class="hidden">
+            <div class="timer">
+                <div class="timer-display" id="timer">75:00</div>
+                <div class="timer-controls">
+                    <button id="pause-btn" onclick="toggleTimer()">Pause</button>
+                    <button onclick="submitTest()">Submit Test</button>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <!-- Part 1: No Calculator -->
+            <div class="test-section">
+                <div class="section-header">
+                    <h2>Part 1: Simple Questions (No Calculator)</h2>
+                    <span>Questions 1-26</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 1 of 50</span>
+                    </div>
+                    <div class="question-text">19 + 2 = </div>
+                    <input type="number" class="text-input" name="q1" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 2 of 50</span>
+                    </div>
+                    <div class="question-text">You find the following coins and notes in your wallet. How much money do you have?</div>
+                    <div class="currency-display">
+                        <div class="currency-item">
+                            <div style="width: 60px; height: 60px; border-radius: 50%; background: #d4af37; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 12px;">$2</div>
+                            <div>$2 coin</div>
+                        </div>
+                        <div class="currency-item">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #c0c0c0; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 10px;">10c</div>
+                            <div>10c coin</div>
+                        </div>
+                        <div class="currency-item">
+                            <div style="width: 45px; height: 45px; border-radius: 50%; background: #c0c0c0; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 10px;">5c</div>
+                            <div>5c coin</div>
+                        </div>
+                        <div class="currency-item">
+                            <div style="width: 80px; height: 40px; background: #ffb3ba; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 12px; border-radius: 4px;">$20</div>
+                            <div>$20 note</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q2" value="$45"> $45</label>
+                        <label class="option"><input type="radio" name="q2" value="$30"> $30</label>
+                        <label class="option"><input type="radio" name="q2" value="$22.15"> $22.15</label>
+                        <label class="option"><input type="radio" name="q2" value="$25"> $25</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 3 of 50</span>
+                    </div>
+                    <div class="question-text">A heat wave reached Tokyo on Saturday. The temperature rose from 20°C at 10:00 am to 35°C at 5:30 pm. How long did it take the temperature to rise from 20°C to 35°C?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q3" value="2 hours"> 2 hours</label>
+                        <label class="option"><input type="radio" name="q3" value="5.5 hours"> 5.5 hours</label>
+                        <label class="option"><input type="radio" name="q3" value="6 hours"> 6 hours</label>
+                        <label class="option"><input type="radio" name="q3" value="7.5 hours"> 7.5 hours</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 4 of 50</span>
+                    </div>
+                    <div class="question-text">What is 25% of 80?</div>
+                    <input type="number" class="text-input" name="q4" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 5 of 50</span>
+                    </div>
+                    <div class="question-text">A rectangle has a length of 12m and width of 8m. What is its area?</div>
+                    <div class="formula-ref">Formula: Area of rectangle = Length × Width</div>
+                    <input type="number" class="text-input" name="q5" placeholder="Answer">
+                    <span> m²</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 6 of 50</span>
+                    </div>
+                    <div class="question-text">Convert 2.5 hours to minutes.</div>
+                    <input type="number" class="text-input" name="q6" placeholder="Answer">
+                    <span> minutes</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 7 of 50</span>
+                    </div>
+                    <div class="question-text">A circle has a radius of 5cm. What is its circumference?</div>
+                    <div class="formula-ref">Formula: Circumference = 2 × π × Radius (use π = 3.14)</div>
+                    <input type="number" class="text-input" name="q7" placeholder="Answer" step="0.1">
+                    <span> cm</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 8 of 50</span>
+                    </div>
+                    <div class="question-text">If 3 apples cost $4.50, how much do 5 apples cost?</div>
+                    <input type="number" class="text-input" name="q8" placeholder="Answer" step="0.01">
+                    <span> $</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 9 of 50</span>
+                    </div>
+                    <div class="question-text">What is 15% of $120?</div>
+                    <input type="number" class="text-input" name="q9" placeholder="Answer" step="0.01">
+                    <span> $</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 10 of 50</span>
+                    </div>
+                    <div class="question-text">A triangle has a base of 10cm and height of 6cm. What is its area?</div>
+                    <div class="formula-ref">Formula: Area of triangle = ½ × Base × Height</div>
+                    <input type="number" class="text-input" name="q10" placeholder="Answer">
+                    <span> cm²</span>
+                </div>
+
+                <!-- Additional Part 1 Questions (11-26) -->
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 11 of 50</span>
+                    </div>
+                    <div class="question-text">45 - 18 = </div>
+                    <input type="number" class="text-input" name="q11" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 12 of 50</span>
+                    </div>
+                    <div class="question-text">8 × 7 = </div>
+                    <input type="number" class="text-input" name="q12" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 13 of 50</span>
+                    </div>
+                    <div class="question-text">96 ÷ 8 = </div>
+                    <input type="number" class="text-input" name="q13" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 14 of 50</span>
+                    </div>
+                    <div class="question-text">Convert 3.2m to centimeters.</div>
+                    <input type="number" class="text-input" name="q14" placeholder="Answer">
+                    <span> cm</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 15 of 50</span>
+                    </div>
+                    <div class="question-text">What is 10% of 250?</div>
+                    <input type="number" class="text-input" name="q15" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 16 of 50</span>
+                    </div>
+                    <div class="question-text">A rectangle has perimeter 24m. If the width is 4m, what is the length?</div>
+                    <div class="formula-ref">Formula: Perimeter = 2 × (Length + Width)</div>
+                    <input type="number" class="text-input" name="q16" placeholder="Answer">
+                    <span> m</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 17 of 50</span>
+                    </div>
+                    <div class="question-text">Convert 1.5 kg to grams.</div>
+                    <input type="number" class="text-input" name="q17" placeholder="Answer">
+                    <span> g</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 18 of 50</span>
+                    </div>
+                    <div class="question-text">What time is it 3 hours and 45 minutes after 2:15 PM?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q18" value="5:45 PM"> 5:45 PM</label>
+                        <label class="option"><input type="radio" name="q18" value="6:00 PM"> 6:00 PM</label>
+                        <label class="option"><input type="radio" name="q18" value="6:15 PM"> 6:15 PM</label>
+                        <label class="option"><input type="radio" name="q18" value="5:30 PM"> 5:30 PM</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 19 of 50</span>
+                    </div>
+                    <div class="question-text">A car travels 180km in 3 hours. What is its average speed?</div>
+                    <div class="formula-ref">Formula: Speed = Distance ÷ Time</div>
+                    <input type="number" class="text-input" name="q19" placeholder="Answer">
+                    <span> km/h</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 20 of 50</span>
+                    </div>
+                    <div class="question-text">Round 47.68 to the nearest whole number.</div>
+                    <input type="number" class="text-input" name="q20" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 21 of 50</span>
+                    </div>
+                    <div class="question-text">What is ¾ as a decimal?</div>
+                    <input type="number" class="text-input" name="q21" placeholder="Answer" step="0.01">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 22 of 50</span>
+                    </div>
+                    <div class="question-text">A box contains 24 chocolates. If ⅓ are eaten, how many remain?</div>
+                    <input type="number" class="text-input" name="q22" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 23 of 50</span>
+                    </div>
+                    <div class="question-text">Convert 2500ml to liters.</div>
+                    <input type="number" class="text-input" name="q23" placeholder="Answer" step="0.1">
+                    <span> l</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 24 of 50</span>
+                    </div>
+                    <div class="question-text">What is 12² (12 squared)?</div>
+                    <input type="number" class="text-input" name="q24" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 25 of 50</span>
+                    </div>
+                    <div class="question-text">A circle has a diameter of 14cm. What is its radius?</div>
+                    <div class="formula-ref">Formula: Radius = Diameter ÷ 2</div>
+                    <input type="number" class="text-input" name="q25" placeholder="Answer">
+                    <span> cm</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 26 of 50</span>
+                    </div>
+                    <div class="question-text">If a pattern goes 2, 4, 8, 16, ... what is the next number?</div>
+                    <input type="number" class="text-input" name="q26" placeholder="Answer">
+                </div>
+            </div>
+
+            <!-- Part 2: With Calculator -->
+            <div class="test-section">
+                <div class="section-header">
+                    <h2>Part 2: More Complex Questions (Calculator Provided)</h2>
+                    <span>Questions 27-50</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 27 of 50</span>
+                    </div>
+                    <div class="question-text">You work for the local administration and are responsible for the green spaces in town. You need to put a fence around this field in the picture. How long will the fence be?</div>
+                    <div class="shape-diagram">
+                        <div class="rectangle">
+                            <div class="dimensions" style="top: -20px; left: 50%; transform: translateX(-50%);">12 m</div>
+                            <div class="dimensions" style="right: -30px; top: 50%; transform: translateY(-50%);">3 m</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q27" value="17 m"> 17 m</label>
+                        <label class="option"><input type="radio" name="q27" value="30 m"> 30 m</label>
+                        <label class="option"><input type="radio" name="q27" value="36 m"> 36 m</label>
+                        <label class="option"><input type="radio" name="q27" value="60 m"> 60 m</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 28 of 50</span>
+                    </div>
+                    <div class="question-text">Benjamin works on a building site. He needs to mix 2 kg of concrete. The ratio of cement, stone and sand is 1 : 1 : 3. How many kilograms of cement does Benjamin need to mix 2 kg of concrete?</div>
+                    <div class="question-text">Give your answer in kg, without unit of measurement.</div>
+                    <input type="number" class="text-input" name="q28" placeholder="Answer" step="0.1">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 29 of 50</span>
+                    </div>
+                    <div class="question-text">Rajesh has to drain the swimming pool so he can clean it. The pump pumps out 4,000 litres each minute. The pool is filled with 2,000,000 litres.</div>
+                    <div class="chart-container">
+                        <canvas id="poolChart" width="500" height="300" style="border: 1px solid #9ca3af; background: white; border-radius: 8px;"></canvas>
+                    </div>
+                    <div class="question-text">Looking at the graph above, how many minutes of will it take until 100,000 litres are left in the pool?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q29" value="250 minutes"> 250 minutes</label>
+                        <label class="option"><input type="radio" name="q29" value="300 minutes"> 300 minutes</label>
+                        <label class="option"><input type="radio" name="q29" value="475 minutes"> 475 minutes</label>
+                        <label class="option"><input type="radio" name="q29" value="500 minutes"> 500 minutes</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 30 of 50</span>
+                    </div>
+                    <div class="question-text">Rajesh wants to fill his pool with water. The pool is 2 m deep.</div>
+                    <img src="images/pool-shape-diagram.png" alt="L-shaped pool diagram showing dimensions: 4m width, 3m and 2m heights, 2m depth" class="diagram-image">
+                    <div class="formula-ref">Volume of Cuboid = Length × Width × Height</div>
+                    <div class="question-text">What is the volume of the pool? Give your answer in m³, without unit of measurement.</div>
+                    <input type="number" class="text-input" name="q30" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 31 of 50</span>
+                    </div>
+                    <div class="question-text">A cylindrical water tank has a radius of 3m and height of 8m. What is its volume?</div>
+                    <img src="images/cylinder-tank-diagram.png" alt="Cylindrical tank with radius 3m and height 8m" class="diagram-image">
+                    <div class="formula-ref">Formula: Volume of cylinder = π × Radius² × Height (use π = 3.14)</div>
+                    <input type="number" class="text-input" name="q31" placeholder="Answer" step="0.01">
+                    <span> m³</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 32 of 50</span>
+                    </div>
+                    <div class="question-text">A loan of $15,000 has an annual interest rate of 7.5%. What is the simple interest for 3 years?</div>
+                    <div class="formula-ref">Simple Interest = Principal × Rate × Time</div>
+                    <input type="number" class="text-input" name="q32" placeholder="Answer" step="0.01">
+                    <span> $</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 33 of 50</span>
+                    </div>
+                    <div class="question-text">A sphere has a radius of 6cm. What is its surface area?</div>
+                    <div class="formula-ref">Formula: Surface area of sphere = 4 × π × Radius² (use π = 3.14)</div>
+                    <input type="number" class="text-input" name="q33" placeholder="Answer" step="0.01">
+                    <span> cm²</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 34 of 50</span>
+                    </div>
+                    <div class="question-text">Calculate 847 × 293 using a calculator.</div>
+                    <input type="number" class="text-input" name="q34" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 35 of 50</span>
+                    </div>
+                    <div class="question-text">A company's revenue increased from $125,000 to $156,250. What was the percentage increase?</div>
+                    <input type="number" class="text-input" name="q35" placeholder="Answer" step="0.1">
+                    <span> %</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 36 of 50</span>
+                    </div>
+                    <div class="question-text">Using the Pythagorean theorem, find the hypotenuse of a right triangle with sides 9cm and 12cm.</div>
+                    <img src="images/right-triangle-diagram.png" alt="Right triangle with sides 9cm and 12cm, hypotenuse labeled as c" class="diagram-image">
+                    <div class="formula-ref">Formula: c² = a² + b²</div>
+                    <input type="number" class="text-input" name="q36" placeholder="Answer" step="0.1">
+                    <span> cm</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 37 of 50</span>
+                    </div>
+                    <div class="question-text">A cone has a radius of 4cm and height of 9cm. What is its volume?</div>
+                    <img src="images/cone-diagram.png" alt="Cone with radius 4cm and height 9cm" class="diagram-image">
+                    <div class="formula-ref">Formula: Volume of cone = ⅓ × π × Radius² × Height (use π = 3.14)</div>
+                    <input type="number" class="text-input" name="q37" placeholder="Answer (to 1 decimal place)" step="0.1">
+                    <span> cm³</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 38 of 50</span>
+                    </div>
+                    <div class="question-text">Convert 87.3°F to Celsius using the formula: C = (F - 32) × 5/9</div>
+                    <input type="number" class="text-input" name="q38" placeholder="Answer" step="0.1">
+                    <span> °C</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 39 of 50</span>
+                    </div>
+                    <div class="question-text">A manufacturing process has a 3.7% defect rate. In a batch of 2,450 items, how many defective items would you expect?</div>
+                    <input type="number" class="text-input" name="q39" placeholder="Answer" step="0.1">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 40 of 50</span>
+                    </div>
+                    <div class="question-text">Calculate the compound interest on $8,000 invested at 4.5% per annum for 2 years.</div>
+                    <div class="formula-ref">Compound Interest = P(1 + r)^t - P, where P = principal, r = rate, t = time</div>
+                    <input type="number" class="text-input" name="q40" placeholder="Answer" step="0.01">
+                    <span> $</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 41 of 50</span>
+                    </div>
+                    <div class="question-text">A rectangular garden is 15.7m long and 8.3m wide. If fencing costs $23.50 per meter, what is the total cost to fence the perimeter?</div>
+                    <img src="images/rectangular-garden-diagram.png" alt="Rectangular garden with dimensions 15.7m × 8.3m showing perimeter" class="diagram-image">
+                    <input type="number" class="text-input" name="q41" placeholder="Answer" step="0.01">
+                    <span> $</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 42 of 50</span>
+                    </div>
+                    <div class="question-text">A car depreciates by 18% each year. If it was worth $32,000 initially, what will it be worth after 3 years? (Give your answer to the nearest dollar)</div>
+                    <input type="number" class="text-input" name="q42" placeholder="Answer (nearest dollar)" step="1">
+                    <span> $</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 43 of 50</span>
+                    </div>
+                    <div class="question-text">Solve for x: 3x + 15 = 48</div>
+                    <input type="number" class="text-input" name="q43" placeholder="Answer">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 44 of 50</span>
+                    </div>
+                    <div class="question-text">A cylindrical pipe has an outer diameter of 12cm and inner diameter of 8cm. If it's 20cm long, what is the volume of material used?</div>
+                    <img src="images/hollow-cylinder-pipe-diagram.png" alt="Cross-section of cylindrical pipe showing outer diameter 12cm, inner diameter 8cm, length 20cm" class="diagram-image">
+                    <div class="formula-ref">Volume = π × (R² - r²) × height, where R = outer radius, r = inner radius (use π = 3.14)</div>
+                    <input type="number" class="text-input" name="q44" placeholder="Answer (to nearest whole number)" step="1">
+                    <span> cm³</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 45 of 50</span>
+                    </div>
+                    <div class="question-text">A triangular plot of land has sides of 45m, 60m, and 75m. Using Heron's formula, find its area.</div>
+                    <div class="formula-ref">Area = √[s(s-a)(s-b)(s-c)], where s = (a+b+c)/2</div>
+                    <input type="number" class="text-input" name="q45" placeholder="Answer" step="0.01">
+                    <span> m²</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 46 of 50</span>
+                    </div>
+                    <div class="question-text">A population grows exponentially from 15,000 to 22,500 in 4 years. What is the annual growth rate? (Give your answer as a percentage to 1 decimal place)</div>
+                    <div class="formula-ref">Growth Rate = (Final/Initial)^(1/years) - 1</div>
+                    <input type="number" class="text-input" name="q46" placeholder="Answer (to 1 decimal place)" step="0.1">
+                    <span> %</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 47 of 50</span>
+                    </div>
+                    <div class="question-text">Calculate 15.7% of $47,350.</div>
+                    <input type="number" class="text-input" name="q47" placeholder="Answer" step="0.01">
+                    <span> $</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 48 of 50</span>
+                    </div>
+                    <div class="question-text">A box has dimensions 12.5cm × 8.7cm × 15.3cm. What is its volume?</div>
+                    <img src="images/3d-box-diagram.png" alt="3D rectangular box showing dimensions 12.5cm × 8.7cm × 15.3cm" class="diagram-image">
+                    <input type="number" class="text-input" name="q48" placeholder="Answer" step="0.01">
+                    <span> cm³</span>
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 49 of 50</span>
+                    </div>
+                    <div class="question-text">A machine produces 2,847 items per hour. How many items will it produce in 6.5 hours?</div>
+                    <input type="number" class="text-input" name="q49" placeholder="Answer" step="0.1">
+                </div>
+
+                <div class="question">
+                    <div class="question-header">
+                        <span class="question-number">Question 50 of 50</span>
+                    </div>
+                    <div class="question-text">A savings account compounds annually at 3.8% annual interest. What will $5,500 grow to after 2.5 years? (Give your answer to the nearest cent)</div>
+                    <div class="formula-ref">A = P(1 + r)^t, where P = principal, r = rate, t = time</div>
+                    <input type="number" class="text-input" name="q50" placeholder="Answer (to nearest cent)" step="0.01">
+                    <span> $</span>
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitTest()">Submit Test</button>
+        </div>
+
+        <div id="results" class="results hidden">
+            <h2>Test Results</h2>
+            <div id="score-summary"></div>
+            <div id="detailed-results"></div>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 75 * 60; // 75 minutes in seconds
+        let timerInterval;
+        let isPaused = false;
+
+        const answers = {
+            q1: 21,
+            q2: "$22.15",
+            q3: "7.5 hours",
+            q4: 20,
+            q5: 96,
+            q6: 150,
+            q7: 31.4,
+            q8: 7.50,
+            q9: 18,
+            q10: 30,
+            q11: 27,
+            q12: 56,
+            q13: 12,
+            q14: 320,
+            q15: 25,
+            q16: 8,
+            q17: 1500,
+            q18: "6:00 PM",
+            q19: 60,
+            q20: 48,
+            q21: 0.75,
+            q22: 16,
+            q23: 2.5,
+            q24: 144,
+            q25: 7,
+            q26: 32,
+            q27: "30 m",
+            q28: 0.4,
+            q29: "475 minutes",
+            q30: 20,
+            q31: 226.08,
+            q32: 3375,
+            q33: 452.16,
+            q34: 248071,
+            q35: 25.0,
+            q36: 15.0,
+            q37: 150.7,
+            q38: 30.7,
+            q39: 90.7,
+            q40: 738.05,
+            q41: 1128.40,
+            q42: 17623,
+            q43: 11,
+            q44: 1257,
+            q45: 1350.00,
+            q46: 10.7,
+            q47: 7433.95,
+            q48: 1661.63,
+            q49: 18505.5,
+            q50: 6034.46
+        };
+
+        function startTest() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('test-content').classList.remove('hidden');
+            startTimer();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (!isPaused) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    updateProgress();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        submitTest();
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateProgress() {
+            const totalTime = 75 * 60;
+            const elapsed = totalTime - timeLeft;
+            const percentage = (elapsed / totalTime) * 100;
+            document.getElementById('progress').style.width = percentage + '%';
+        }
+
+        function toggleTimer() {
+            isPaused = !isPaused;
+            const btn = document.getElementById('pause-btn');
+            btn.textContent = isPaused ? 'Resume' : 'Pause';
+        }
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            
+            // Hide test content
+            document.getElementById('test-content').classList.add('hidden');
+            
+            // Calculate and display results
+            calculateResults();
+            
+            // Show results
+            document.getElementById('results').classList.remove('hidden');
+        }
+
+        function calculateResults() {
+            let correctAnswers = 0;
+            let totalQuestions = 50;
+            let part1Correct = 0;
+            let part2Correct = 0;
+            let detailedResults = '';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const userAnswer = getUserAnswer(questionName);
+                const correctAnswer = answers[questionName];
+                const isCorrect = checkAnswer(userAnswer, correctAnswer);
+                
+                if (isCorrect) {
+                    correctAnswers++;
+                    if (i <= 26) part1Correct++;
+                    else part2Correct++;
+                }
+
+                const resultClass = isCorrect ? 'correct' : 'incorrect';
+                const resultText = isCorrect ? '✓' : '✗';
+                
+                detailedResults += `
+                    <div style="margin: 5px 0; padding: 8px; background: ${isCorrect ? '#f0f9ff' : '#fef2f2'}; border-radius: 4px;">
+                        <span class="${resultClass}">${resultText}</span> 
+                        Question ${i}: Your answer: "${userAnswer || 'No answer'}" | Correct answer: "${correctAnswer}"
+                    </div>
+                `;
+            }
+
+            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            const part1Percentage = Math.round((part1Correct / 26) * 100);
+            const part2Percentage = Math.round((part2Correct / 24) * 100);
+
+            document.getElementById('score-summary').innerHTML = `
+                <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3>Overall Score: ${correctAnswers}/${totalQuestions} (${percentage}%)</h3>
+                    <p><strong>Part 1 (No Calculator):</strong> ${part1Correct}/26 (${part1Percentage}%)</p>
+                    <p><strong>Part 2 (With Calculator):</strong> ${part2Correct}/24 (${part2Percentage}%)</p>
+                    <p><strong>Time taken:</strong> ${Math.floor((75 * 60 - timeLeft) / 60)} minutes ${(75 * 60 - timeLeft) % 60} seconds</p>
+                </div>
+            `;
+
+            document.getElementById('detailed-results').innerHTML = `
+                <h3>Detailed Results:</h3>
+                ${detailedResults}
+            `;
+        }
+
+        function getUserAnswer(questionName) {
+            // Check for radio buttons first
+            const radioInput = document.querySelector(`input[name="${questionName}"]:checked`);
+            if (radioInput) {
+                return radioInput.value;
+            }
+            
+            // Check for text/number inputs
+            const textInput = document.querySelector(`input[name="${questionName}"]`);
+            if (textInput) {
+                return textInput.value.trim();
+            }
+            
+            return '';
+        }
+
+        function checkAnswer(userAnswer, correctAnswer) {
+            if (!userAnswer) return false;
+            
+            // Convert both to strings and normalize
+            const user = userAnswer.toString().toLowerCase().trim();
+            const correct = correctAnswer.toString().toLowerCase().trim();
+            
+            // Exact match
+            if (user === correct) return true;
+            
+            // Numeric comparison with tolerance
+            const userNum = parseFloat(user);
+            const correctNum = parseFloat(correct);
+            
+            if (!isNaN(userNum) && !isNaN(correctNum)) {
+                // Allow 1% tolerance for floating point calculations
+                const tolerance = Math.max(0.01, Math.abs(correctNum * 0.01));
+                return Math.abs(userNum - correctNum) <= tolerance;
+            }
+            
+            return false;
+        }
+
+        // Initialize progress bar
+        updateProgress();
+
+        // Draw the pool drainage chart
+        function drawPoolChart() {
+            const canvas = document.getElementById('poolChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Set up margins and chart area
+            const margin = { top: 40, right: 40, bottom: 60, left: 80 };
+            const chartWidth = width - margin.left - margin.right;
+            const chartHeight = height - margin.top - margin.bottom;
+            
+            // Data points for the line V(t) = 2,000,000 - 4,000t
+            const maxTime = 500; // minutes
+            const maxVolume = 2000000; // litres
+            
+            // Draw axes
+            ctx.strokeStyle = '#374151';
+            ctx.lineWidth = 2;
+            
+            // Y-axis
+            ctx.beginPath();
+            ctx.moveTo(margin.left, margin.top);
+            ctx.lineTo(margin.left, margin.top + chartHeight);
+            ctx.stroke();
+            
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(margin.left, margin.top + chartHeight);
+            ctx.lineTo(margin.left + chartWidth, margin.top + chartHeight);
+            ctx.stroke();
+            
+            // Draw grid lines and labels
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            ctx.font = '12px Arial';
+            ctx.fillStyle = '#374151';
+            
+            // Y-axis labels and grid lines (Volume)
+            for (let i = 0; i <= 5; i++) {
+                const volume = i * 400000; // 0, 400k, 800k, 1.2M, 1.6M, 2M
+                const y = margin.top + chartHeight - (volume / maxVolume) * chartHeight;
+                
+                // Grid line
+                ctx.beginPath();
+                ctx.moveTo(margin.left, y);
+                ctx.lineTo(margin.left + chartWidth, y);
+                ctx.stroke();
+                
+                // Label
+                const label = volume >= 1000000 ? (volume / 1000000).toFixed(1) + 'M' : (volume / 1000) + 'k';
+                ctx.fillText(label, margin.left - 60, y + 4);
+            }
+            
+            // X-axis labels and grid lines (Time)
+            for (let i = 0; i <= 5; i++) {
+                const time = i * 100; // 0, 100, 200, 300, 400, 500
+                const x = margin.left + (time / maxTime) * chartWidth;
+                
+                // Grid line
+                ctx.beginPath();
+                ctx.moveTo(x, margin.top);
+                ctx.lineTo(x, margin.top + chartHeight);
+                ctx.stroke();
+                
+                // Label
+                ctx.fillText(time.toString(), x - 10, margin.top + chartHeight + 20);
+            }
+            
+            // Draw the main line V(t) = 2,000,000 - 4,000t
+            ctx.strokeStyle = '#dc2626';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            const startX = margin.left;
+            const startY = margin.top;
+            const endX = margin.left + chartWidth;
+            const endY = margin.top + chartHeight;
+            
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            
+            // Highlight the 100,000 litres point
+            const targetVolume = 100000;
+            const targetTime = (maxVolume - targetVolume) / 4000; // 475 minutes
+            const targetX = margin.left + (targetTime / maxTime) * chartWidth;
+            const targetY = margin.top + chartHeight - (targetVolume / maxVolume) * chartHeight;
+            
+            // Draw point
+            ctx.fillStyle = '#dc2626';
+            ctx.beginPath();
+            ctx.arc(targetX, targetY, 6, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw dashed lines to axes
+            ctx.strokeStyle = '#dc2626';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            
+            // Vertical line to x-axis
+            ctx.beginPath();
+            ctx.moveTo(targetX, targetY);
+            ctx.lineTo(targetX, margin.top + chartHeight);
+            ctx.stroke();
+            
+            // Horizontal line to y-axis
+            ctx.beginPath();
+            ctx.moveTo(targetX, targetY);
+            ctx.lineTo(margin.left, targetY);
+            ctx.stroke();
+            
+            ctx.setLineDash([]);
+            
+            // Add labels
+            ctx.fillStyle = '#374151';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('Volume (litres) vs Time Graph', width/2 - 100, 25);
+            ctx.fillText('V(t) = 2,000,000 - 4,000t', width/2 - 80, height - 10);
+            
+            // Axis labels
+            ctx.font = '12px Arial';
+            ctx.fillText('Time (minutes)', width/2 - 40, height - 20);
+            
+            // Rotate and draw y-axis label
+            ctx.save();
+            ctx.translate(15, height/2);
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText('Volume (litres)', -40, 0);
+            ctx.restore();
+            
+            // Add point label
+            ctx.fillStyle = '#dc2626';
+            ctx.font = 'bold 12px Arial';
+            ctx.fillText('100k litres', targetX - 30, targetY - 10);
+            ctx.fillText('475 min', targetX - 20, margin.top + chartHeight + 40);
+        }
+        
+        // Draw chart when page loads
+        setTimeout(drawPoolChart, 100);
+    </script>
+</body>
+</html>
