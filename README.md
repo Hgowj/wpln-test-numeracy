@@ -3,7 +3,7 @@
 A comprehensive practice platform for Workplace Literacy and Numeracy (WPLN) Numeracy assessments, recreated to help users prepare for the official tests with realistic exam conditions and authentic mathematical scenarios.
 
 ## 🚀 Live Demo
-Try it now: https://hgowi.github.io/wpln-test-numeracy/
+Try it now: https://hgowj.github.io/wpln-test-numeracy/
 
 ## About WPLN Numeracy
 
